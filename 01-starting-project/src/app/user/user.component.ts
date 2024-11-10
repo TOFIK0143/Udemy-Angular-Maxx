@@ -1,19 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+
+// defining object types
+// type User = {
+//   id: string;
+//   name: string;
+//   avatar: string
+// }
+
+interface User {
+  id: string;
+  name: string;
+  avatar: string
+}
 
 @Component({
   selector: 'app-user',
   standalone: true,
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
 })
-
 export class UserComponent {
+  @Input({ required: true }) user!: User;
+  @Output() select = new EventEmitter();
 
-  @Input() user?: {id: string; name:string; avatar:string};
-
-
-  get imagePath() { 
-    return this.user ? `assets/users/${this.user.avatar}` :''; 
+  get imagePath() {
+    return 'assets/users/' + this.user.avatar;
   }
-  
+
+  onSelectUser() {
+    this.select.emit(this.user.id);
+  }
 }

@@ -7,4 +7,3 @@
 - Property Binding
 - Event Binding 
 - Introduction of Signal
-- 
